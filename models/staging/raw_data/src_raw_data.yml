@@ -1,0 +1,76 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: PSG raw data
+    database: psg
+    schema: raw
+    tables:
+      - name: person
+        description: the raw persons data
+        columns:
+          - name: v
+            description: the json person data
+            tests:
+              - not_null
+            
+      - name: team
+        description: the raw teams data
+        columns:
+          - name: v
+            description: the json team data
+            tests:
+              - not_null
+
+      - name: squad
+        description: the raw squad data
+        columns:
+          - name: v
+            description: the json squad data
+            tests:
+              - not_null
+
+      - name: trophies
+        description: the raw trophies data
+        columns:
+          - name: v
+            description: the json trophies data
+            tests:
+              - not_null
+
+      - name: match_stats
+        description: the raw match_stats data
+        columns:
+          - name: v
+            description: the json match_stats data
+            tests:
+              - not_null
+      
+      - name: match_events
+        description: the raw match_events data
+        columns:
+          - name: v
+            description: the json match_events data
+            tests:
+              - not_null
+
+      - name: match_tournament_schedule
+        description: the raw match_tournament_schedule data
+        columns:
+          - name: v
+            description: the json match_tournament_schedule data
+            tests:
+              - not_null
+
+      - name: competitions
+        description: the raw competitions data
+        columns:
+          - name: v
+            description: the json competitions data
+            tests:
+              - not_null
+
+        # loaded_at_field: _etl_loaded_at
+        # freshness:
+        #   warn_after: {count: 12, period: hour}
+        #   error_after: {count: 24, period: hour}
