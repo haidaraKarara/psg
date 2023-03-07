@@ -2,6 +2,8 @@ with squad_person as (
     select
 
         s2.value:id::string as id,
+        s1.value:contestantId::string as contestantId,
+        s1.value:contestantClubName::string as club,
         s2.value:firstName::string as firstName,
         s2.value:lastName::string as lastName,
         s2.value:matchName::string as matchName,
@@ -22,10 +24,11 @@ with squad_person as (
         s2.value:type::string as type,
         s2.value:active::string as active,
         s2.value:position::string as position,
-        s1.value as src
+        try_to_timestamp(regexp_replace(s.v:lastUpdated,'z|Z')) as lastupdated,
+        s.v as src
 
-    from {{ source('raw_data', 'squad') }},
-    lateral flatten ( input => v:squad) s1,
+    from {{ source('raw_data', 'squad') }} as s,
+    lateral flatten ( input => s.v:squad) s1,
     lateral flatten ( input => s1.value:person) s2
 )
 

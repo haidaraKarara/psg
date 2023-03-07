@@ -29,10 +29,10 @@ with person as (
         p2.value:role::string as membershipRole,
         p2.value:stat::variant as membershipStat,
         try_to_date(regexp_replace(p2.value:startDate, 'z|Z')) as membershipStartDate,
-        try_to_date(regexp_replace(p1.value:lastUpdated, 'z|Z')) as lastUpdated,
-        p1.value as src
-    from {{ source('raw_data', 'person') }},
-    lateral flatten ( input => v:person) p1,
+        try_to_timestamp(regexp_replace(p.v:lastUpdated, 'z|Z')) as lastUpdated,
+        p.v as src
+    from {{ source('raw_data', 'person') }} p,
+    lateral flatten ( input => p.v:person) p1,
     lateral flatten (input => p1.value:membership) p2)
 
 select * from person

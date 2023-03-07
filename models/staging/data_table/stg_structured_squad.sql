@@ -17,9 +17,9 @@ with squad as (
         value:venueName::string as venueName,
         value:venueId::string as venueId,
         value:person::variant as person,
-        value as src
-    from {{ source('raw_data', 'squad') }},
-    lateral flatten ( input => v:squad)
+        s.v as src
+    from {{ source('raw_data', 'squad') }} as s,
+    lateral flatten ( input => s.v:squad)
 )
 
 select * from squad
