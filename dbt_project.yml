@@ -33,12 +33,23 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   psg:
-    # Applies to all files under models/example/
+
     staging:
       +materialized: view
+
       data_table:
         schema: "DATA_TABLE"
+
     marts:
+      +materialized: table
+
       referential:
         schema: "DATA_TABLE"
-      +materialized: table
+        
+      enterprise:
+        schema: "DATA_TABLE"
+
+      data_view:
+        schema: "DATA_VIEW"
+        +materialized: view
+       
