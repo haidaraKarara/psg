@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: raw_data
     description: PSG raw data
-    database: psg
+    database: psg_dev
     schema: raw
     tables:
       - name: person

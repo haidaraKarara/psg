@@ -87,3 +87,27 @@ filtered as (
 )
 
 select * from filtered limit 1
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": [
+					"arn:aws:iam::217748682645:user/3xq40000-s",
+					"arn:aws:iam::217748682645:user/9jo40000-s"
+				]
+			},
+			"Action": "sts:AssumeRole",
+			"Condition": {
+				"ForAnyValue:StringEquals": {
+					"sts:ExternalId": [
+						"NB60849_SFCRole=2_gL0oehvoxdYFxxeKrwLi7/NjrdM=",
+						"NB60849_SFCRole=2_gL0oehvoxdYFxxeKrwLi7/NjrdM="
+					]
+				}
+			}
+		}
+	]
+}
