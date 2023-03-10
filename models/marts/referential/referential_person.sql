@@ -29,8 +29,8 @@ union_person as (
         position,
         national,
         club,
-        lastupdated,
-        src
+        lastupdated
+        --src
 
     from person
 
@@ -57,8 +57,8 @@ union_person as (
         position,
         null as national,
         club,
-        lastupdated,
-        src
+        lastupdated
+        --src
 
     from squad_person
     where id not in 
@@ -66,4 +66,4 @@ union_person as (
 )
 
 select * from union_person 
---where id = '1b63jhwo1x2vxmtbk1hnay7l5'
+--where id = '9oxra7saok5mwixird12vf6c5'

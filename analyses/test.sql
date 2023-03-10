@@ -34,3 +34,56 @@ group by id
 order by c desc;
 
 */
+
+
+
+
+
+
+
+
+
+
+
+
+with match_stats as (
+
+    select * from {{ ref('enterprise_match') }}
+),
+filtered as (
+
+    select
+    
+        -- m.matchid, m.description, m.sportname, m.competitionname, m.competitionformat, m.countryname, 
+        -- m.tournamentcalendarname, m.tournamentcalendarstartdate, m.tournamentcalendarenddate, m.stagename, 
+        -- m.seriesname, m.venueneutral, m.venuelongname, m.matchstatus, m.winner, 
+        -- m.contestantofficialname_1, m.contestantposition_1, m.contestantcountryname_1, m.contestantofficialname_2,
+        -- m.contestantposition_2, m.contestantcountryname_2, m.scoreshthome, m.scoreshtaway, m.scoresfthome, m.scoresftaway, m.scorestotalhome, 
+        -- m.scorestotalaway, m.lineupteamofficialfirstname_1, m.lineupteamofficiallastname_1, m.lineupteamofficialfirstname_2, 
+        -- m.lineupteamofficiallastname_2, m.attendance, m.matchlengthmin, m.coveragelevel, m.matchdate, m.matchtime, m.matchlocaldate, 
+        -- m.matchlocaltime, m.week, m.postmatch, m.numberofperiods, m.periodlength, m.lastupdated,
+        m.matchid, m.description, m.sportname, m.competitionname, m.competitionformat, m.countryname,
+        m.tournamentcalendarname, m.tournamentcalendarstartdate, m.tournamentcalendarenddate, m.stagename, 
+        m.seriesname, m.matchstatus,
+        case
+            when winner = m.contestantposition_1 then m.contestantofficialname_1
+            when winner = m.contestantposition_2 then m.contestantofficialname_2
+            else ''
+        end as winner,
+        {% if 1==1 %}
+            {% set team1=contestantofficialname_1 %}
+
+            case
+                when winner = 'home' and winner = m.contestantposition_1 then m.scoresfthome
+                when winner = 'away' and winner = m.contestantposition_1 then m.scoresftaway
+                else ''
+            end as r
+        {% endif %}
+        
+
+
+    from match_stats m
+    --lateral flatten(input => m:)
+)
+
+select * from filtered limit 1
