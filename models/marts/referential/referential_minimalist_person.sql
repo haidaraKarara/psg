@@ -15,9 +15,7 @@ union_person as (
         lastname,
         matchname,
         shortfirstname,
-        shortlastname,
-        foot
-
+        shortlastname
     from person
 
         union 
@@ -29,9 +27,7 @@ union_person as (
         lastname,
         matchname,
         shortfirstname,
-        shortlastname,
-        foot
-
+        shortlastname
     from squad_person
     where id not in 
         (select distinct id from person))
