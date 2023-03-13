@@ -5,7 +5,7 @@
 
         {{ default_schema }}
     
-    {%- elif env_var('DBT_PSG_ENV') in ['prod','uat'] %}
+    {%- elif env_var('DBT_PSG_ENV') in ['prod','uat','dev'] %}
 
         {{ custom_schema_name | trim}}
 
