@@ -19,8 +19,8 @@ final as (
         city,
         postaladdress,
         addresszip,
-        founded,
-        lastupdated
+        founded
+        --lastupdated
     
     from team
 )
