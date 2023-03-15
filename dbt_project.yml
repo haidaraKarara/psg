@@ -55,3 +55,4 @@ models:
        
 tests:
   +store_failures: true  # all tests
+  +schema: failed_tests
